@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tbcare/features/maps/presentation/pages/map_page.dart';
 import 'core/theme/app_colors.dart';
 import 'features/treatment/presentation/pages/treatment_dashboard_page.dart';
 
@@ -15,7 +16,7 @@ class _OuterShellState extends State<OuterShell> {
   final List<Widget> _pages = [
     const TreatmentDashboardPage(),
     const Center(child: Text('Health Screening')),
-    const Center(child: Text('Map View')),
+    const MapPage(),
     const Center(child: Text('My Journey')),
     const Center(child: Text('Library')),
   ];
