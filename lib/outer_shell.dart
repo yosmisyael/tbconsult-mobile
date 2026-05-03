@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tbcare/features/journey/presentation/pages/journey_page.dart';
 import 'package:tbcare/features/maps/presentation/pages/map_page.dart';
 import 'core/theme/app_colors.dart';
 import 'features/treatment/presentation/pages/treatment_dashboard_page.dart';
@@ -17,7 +18,7 @@ class _OuterShellState extends State<OuterShell> {
     const TreatmentDashboardPage(),
     const Center(child: Text('Health Screening')),
     const MapPage(),
-    const Center(child: Text('My Journey')),
+    const JourneyPage(),
     const Center(child: Text('Library')),
   ];
 
