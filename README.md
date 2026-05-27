@@ -1,4 +1,4 @@
-# TBCare
+# TBConsult
 An Integrated Digital Ecosystem for Tuberculosis Patient Compliance and Support.
 
 ## Developer Notes
@@ -19,7 +19,7 @@ lib/
 │   ├── auth/                     # Authentication & Session management
 │   ├── medication/               # Medication Log, Doses, & Reminders
 │   ├── treatment/                # Dashboard, Streaks, & Progress Journey
-│   ├── health_hub/               # CareBot (AI) & Health Screening (Triage)
+│   ├── health_hub/               # TBConsult (AI) & Health Screening (Triage)
 │   ├── maps/                     # DOTS Facilities & Heatmaps
 │   └── literacy/                 # Education articles & Resource library
 │       ├── data/                 # Data Layer: Implementation
@@ -37,3 +37,9 @@ lib/
 ├── main.dart                     # App entry point
 └── injection_container.dart       # Service locator / DI registration
 ```
+
+### Backend (Python / FastAPI)
+The application includes an AI-powered Medical Triage Chatbot backend located in the `backend/` folder.
+It is built with **FastAPI**, **LangGraph**, **pgvector**, and **DigitalOcean Serverless Inference**.
+
+👉 **[See Backend README for setup & run instructions](backend/README.md)**

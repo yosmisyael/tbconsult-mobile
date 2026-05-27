@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tbcare/core/theme/app_colors.dart';
+import 'package:TBConsult/core/theme/app_colors.dart';
 
 class FacilityDetailSheet extends StatelessWidget {
   const FacilityDetailSheet({super.key});

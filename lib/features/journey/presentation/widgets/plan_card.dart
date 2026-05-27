@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tbcare/features/journey/presentation/pages/adjust_journey_page.dart';
+import 'package:TBConsult/features/journey/presentation/pages/adjust_journey_page.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/entities/medication_plan_entity.dart';
 

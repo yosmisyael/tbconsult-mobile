@@ -18,7 +18,7 @@ class TreatmentDashboardPage extends StatelessWidget {
           onPressed: () {},
         ),
         title: const Text(
-          'TBCare',
+          'TBConsult',
           style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

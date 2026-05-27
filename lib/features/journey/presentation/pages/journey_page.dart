@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tbcare/features/journey/presentation/pages/management_page.dart';
+import 'package:TBConsult/features/journey/presentation/pages/management_page.dart';
 import '../widgets/month_card.dart';
 import '../widgets/achievement_card.dart';
 import '../../domain/entities/achievement_entity.dart';
-import 'package:tbcare/core/theme/app_colors.dart';
+import 'package:TBConsult/core/theme/app_colors.dart';
 
 class JourneyPage extends StatelessWidget {
   const JourneyPage({super.key});

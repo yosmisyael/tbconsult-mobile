@@ -1,0 +1,352 @@
+[
+  {
+    "id": "tb_med_001",
+    "category": "medication",
+    "title": "First-Line TB Medications (HRZE)",
+    "content": "Standard first-line TB treatment uses the HRZE regimen: Isoniazid (H/INH), Rifampicin (R/RIF), Pyrazinamide (Z/PZA), and Ethambutol (E/EMB). Treatment is divided into two phases: an intensive phase (2 months with all four drugs) and a continuation phase (4 months with Isoniazid and Rifampicin only). This regimen is recommended by WHO for drug-susceptible TB.",
+    "keywords": ["isoniazid", "rifampicin", "pyrazinamide", "ethambutol", "hrze", "obat", "medication", "first-line", "lini pertama", "obat tb", "inh", "rif", "pza", "emb", "rifampisin", "pirazinamid"]
+  },
+  {
+    "id": "tb_med_002",
+    "category": "medication",
+    "title": "How to Take TB Medication",
+    "content": "TB medications should be taken once daily, preferably on an empty stomach (1 hour before or 2 hours after meals) for maximum absorption. Rifampicin works best on an empty stomach. If nausea is severe, taking medication with a small snack (like crackers) is acceptable. Never skip doses or stop treatment early, even if you feel better. Incomplete treatment can lead to drug-resistant TB.",
+    "keywords": ["take", "minum", "dosis", "dose", "kapan", "when", "how", "cara", "perut kosong", "empty stomach", "makan", "food", "jadwal", "schedule", "aturan minum"]
+  },
+  {
+    "id": "tb_med_003",
+    "category": "medication",
+    "title": "Fixed-Dose Combination (FDC) Tablets",
+    "content": "Fixed-Dose Combination (FDC) tablets combine multiple TB drugs into a single pill. This simplifies treatment and improves adherence. Common FDCs include: 4FDC (HRZE for intensive phase) and 2FDC (HR for continuation phase). The number of tablets depends on the patient's weight category. FDC tablets should be swallowed whole, not crushed or chewed.",
+    "keywords": ["fdc", "kombipak", "tablet", "pil", "pill", "kombinasi", "combination", "fixed dose", "4fdc", "2fdc", "berapa tablet"]
+  },
+  {
+    "id": "tb_med_004",
+    "category": "medication",
+    "title": "Missed Dose Guidelines",
+    "content": "If you miss a dose, take it as soon as you remember on the same day. If it is almost time for your next dose, skip the missed dose and continue your regular schedule. Never take a double dose to make up for a missed one. If you miss doses frequently, contact your DOTS supervisor immediately. Missing multiple doses may require restarting or extending treatment.",
+    "keywords": ["missed", "lupa", "skip", "terlewat", "ketinggalan", "dose", "dosis", "forget", "forgot", "telat", "late", "tidak minum", "bolos"]
+  },
+  {
+    "id": "tb_med_005",
+    "category": "medication",
+    "title": "Drug Interactions with TB Medication",
+    "content": "Rifampicin interacts with many drugs by accelerating their metabolism. Important interactions include: oral contraceptives (reduced effectiveness — use alternative birth control), antiretrovirals for HIV (dose adjustments needed), diabetes medications, blood thinners (warfarin), and antifungals. Always inform your healthcare provider about all medications and supplements you are taking.",
+    "keywords": ["interaction", "interaksi", "drug", "obat lain", "contraceptive", "kontrasepsi", "kb", "hiv", "arv", "diabetes", "warfarin", "supplement", "suplemen", "herbal", "jamu"]
+  },
+  {
+    "id": "tb_med_006",
+    "category": "medication",
+    "title": "TB Medication Storage",
+    "content": "Store TB medications in a cool, dry place away from direct sunlight. Keep them at room temperature (15-25°C). Do not store in the bathroom or near water. Keep medications out of reach of children. Check expiration dates regularly. Rifampicin may cause red-orange discoloration of urine, tears, and sweat — this is normal and harmless.",
+    "keywords": ["storage", "simpan", "store", "penyimpanan", "suhu", "temperature", "expired", "kadaluarsa", "kadaluwarsa"]
+  },
+  {
+    "id": "tb_med_007",
+    "category": "medication",
+    "title": "Second-Line TB Medications",
+    "content": "Second-line medications are used for drug-resistant TB (MDR-TB). These include fluoroquinolones (Levofloxacin, Moxifloxacin), injectables (Kanamycin, Amikacin), and newer drugs (Bedaquiline, Delamanid, Linezolid). Second-line treatment is longer (9-20 months) and has more side effects. It must be managed by a specialist TB treatment center.",
+    "keywords": ["second-line", "lini kedua", "mdr", "resistant", "resisten", "kebal", "levofloxacin", "bedaquiline", "linezolid", "moxifloxacin", "xdr"]
+  },
+  {
+    "id": "tb_med_008",
+    "category": "medication",
+    "title": "Pyridoxine (Vitamin B6) Supplementation",
+    "content": "Pyridoxine (Vitamin B6) is routinely prescribed alongside Isoniazid to prevent peripheral neuropathy (tingling, numbness in hands and feet). The standard dose is 10-25 mg daily. Patients at higher risk include those with diabetes, HIV, malnutrition, or alcohol use. Always take Vitamin B6 as prescribed alongside your TB medication.",
+    "keywords": ["vitamin b6", "pyridoxine", "piridoksin", "neuropathy", "neuropati", "kesemutan", "tingling", "numbness", "mati rasa", "tangan", "kaki", "hands", "feet", "supplement"]
+  },
+  {
+    "id": "tb_side_001",
+    "category": "sideEffects",
+    "title": "Nausea and Vomiting from TB Medication",
+    "content": "Nausea and vomiting are common side effects, especially during the first few weeks of treatment. To manage: take medication with a light snack (crackers, toast), avoid spicy or fatty foods before taking medicine, drink ginger tea, and take medication before bedtime if approved by your doctor. If vomiting occurs within 30 minutes of taking medication, contact your healthcare provider. Persistent vomiting may indicate hepatotoxicity and requires immediate medical evaluation.",
+    "keywords": ["nausea", "mual", "vomiting", "muntah", "stomach", "perut", "sick", "mual-mual", "eneg", "enek", "pusing", "dizzy"]
+  },
+  {
+    "id": "tb_side_002",
+    "category": "sideEffects",
+    "title": "Hepatotoxicity (Liver Damage)",
+    "content": "Isoniazid, Rifampicin, and Pyrazinamide can all cause liver damage (hepatotoxicity). Warning signs include: dark-colored urine, yellowing of skin or eyes (jaundice), persistent nausea/vomiting, abdominal pain (especially right upper quadrant), unusual fatigue, and loss of appetite lasting more than 3 days. STOP all TB medication immediately and seek emergency medical care if you experience these symptoms. Liver function tests should be monitored regularly.",
+    "keywords": ["liver", "hati", "hepatotoxicity", "hepatitis", "jaundice", "kuning", "yellow", "dark urine", "urine gelap", "sakit perut", "abdominal pain", "mata kuning", "badan kuning", "ast", "alt", "sgot", "sgpt"]
+  },
+  {
+    "id": "tb_side_003",
+    "category": "sideEffects",
+    "title": "Visual Disturbances from Ethambutol",
+    "content": "Ethambutol can cause optic neuritis, leading to visual problems including blurred vision, difficulty distinguishing red and green colors, and reduced visual acuity. Report any vision changes immediately to your healthcare provider. A baseline eye examination should be done before starting treatment. Ethambutol-related vision changes are usually reversible if the drug is stopped promptly.",
+    "keywords": ["vision", "penglihatan", "mata", "eye", "blur", "blurry", "kabur", "color", "warna", "buta warna", "optic", "ethambutol", "see", "lihat", "blind"]
+  },
+  {
+    "id": "tb_side_004",
+    "category": "sideEffects",
+    "title": "Joint Pain and Hyperuricemia",
+    "content": "Pyrazinamide commonly causes elevated uric acid levels (hyperuricemia), which can lead to joint pain similar to gout. Symptoms include swelling, redness, and pain in joints — especially the big toe, ankles, and knees. Management: increase water intake, avoid alcohol, limit purine-rich foods (organ meats, shellfish). If pain is severe, consult your healthcare provider. Do not self-medicate with aspirin as it may interact with TB drugs.",
+    "keywords": ["joint", "sendi", "pain", "nyeri", "gout", "asam urat", "uric acid", "bengkak", "swelling", "arthritis", "kaki", "foot", "toe", "jempol", "pegal", "pyrazinamide"]
+  },
+  {
+    "id": "tb_side_005",
+    "category": "sideEffects",
+    "title": "Skin Rash and Allergic Reactions",
+    "content": "Skin rashes can occur with any TB medication. Mild rashes (small, non-itchy) may resolve on their own. However, seek immediate medical attention for: widespread rash, severe itching, rash with fever, blistering or peeling skin, or swelling of face/lips/tongue. These may indicate a serious allergic reaction (Stevens-Johnson Syndrome). Do not restart the suspected medication without medical supervision.",
+    "keywords": ["rash", "ruam", "skin", "kulit", "itching", "gatal", "allergy", "alergi", "merah", "red", "bintik", "spots", "hives", "biduran", "bentol"]
+  },
+  {
+    "id": "tb_side_006",
+    "category": "sideEffects",
+    "title": "Red-Orange Body Fluids from Rifampicin",
+    "content": "Rifampicin causes harmless discoloration of urine, tears, sweat, and saliva to a red-orange color. This is a normal effect and actually indicates that the medication is being absorbed properly. Contact lens wearers should switch to glasses during treatment as lenses may be permanently stained. Clothes and bedsheets may also be stained — this is not dangerous.",
+    "keywords": ["red", "orange", "merah", "urine", "air kencing", "tears", "air mata", "sweat", "keringat", "discoloration", "warna", "color", "rifampicin", "stain", "noda"]
+  },
+  {
+    "id": "tb_side_007",
+    "category": "sideEffects",
+    "title": "Fatigue and Weakness During Treatment",
+    "content": "Fatigue is common during TB treatment due to both the disease and medication effects. Tips to manage: get adequate rest (8-10 hours sleep), eat nutritious meals regularly, stay hydrated, do light exercise as tolerated (walking), and avoid alcohol. Severe fatigue combined with nausea, dark urine, or jaundice may indicate liver problems — seek medical attention immediately.",
+    "keywords": ["tired", "lelah", "fatigue", "capek", "cape", "lemas", "weak", "weakness", "lesu", "ngantuk", "sleepy", "energy", "energi", "stamina"]
+  },
+  {
+    "id": "tb_side_008",
+    "category": "sideEffects",
+    "title": "Hearing Problems from Injectable TB Drugs",
+    "content": "Injectable TB medications (Kanamycin, Amikacin, Streptomycin) used for drug-resistant TB can cause hearing loss and balance problems. Symptoms include ringing in ears (tinnitus), difficulty hearing conversations, and dizziness. Report any hearing changes immediately. Monthly hearing tests are recommended during injectable treatment. Hearing loss may be permanent if not detected early.",
+    "keywords": ["hearing", "pendengaran", "deaf", "tuli", "ringing", "tinnitus", "telinga", "ear", "berdenging", "balance", "keseimbangan", "dizzy", "pusing", "kanamycin", "streptomycin"]
+  },
+  {
+    "id": "tb_side_009",
+    "category": "sideEffects",
+    "title": "Numbness and Tingling (Peripheral Neuropathy)",
+    "content": "Isoniazid can cause peripheral neuropathy — numbness, tingling, or burning sensation in the hands and feet. This is more common in malnourished patients, diabetics, HIV-positive patients, pregnant women, and those who consume alcohol. Prevention: take Vitamin B6 (Pyridoxine) 10-25 mg daily as prescribed. If symptoms develop, report to your healthcare provider immediately.",
+    "keywords": ["numbness", "tingling", "mati rasa", "kesemutan", "neuropathy", "neuropati", "tangan", "kaki", "hands", "feet", "burning", "terbakar", "panas", "isoniazid"]
+  },
+  {
+    "id": "tb_side_010",
+    "category": "sideEffects",
+    "title": "Appetite Loss During TB Treatment",
+    "content": "Loss of appetite is common both from TB disease and medication. Tips to manage: eat small, frequent meals (5-6 times daily) instead of 3 large meals, choose nutrient-dense foods, try mild-flavored foods when nauseous, eat foods you enjoy, and drink fluids between meals rather than with meals. Persistent appetite loss for more than a week should be reported to your healthcare provider.",
+    "keywords": ["appetite", "nafsu makan", "hunger", "lapar", "eating", "makan", "tidak mau makan", "anoreksia", "anorexia", "kurus", "thin", "weight loss", "berat badan"]
+  },
+  {
+    "id": "tb_sym_001",
+    "category": "symptoms",
+    "title": "Common TB Symptoms",
+    "content": "Classic tuberculosis symptoms include: persistent cough lasting more than 2-3 weeks, coughing up blood or phlegm (hemoptysis), chest pain when breathing or coughing, unintentional weight loss, fatigue, fever (often low-grade, worse in the evening), night sweats, loss of appetite, and chills. Not all patients have all symptoms. Some patients, especially those with HIV, may have atypical presentations.",
+    "keywords": ["symptoms", "gejala", "cough", "batuk", "blood", "darah", "fever", "demam", "weight loss", "berat badan turun", "night sweats", "keringat malam", "chest pain", "nyeri dada", "fatigue", "lelah", "tanda"]
+  },
+  {
+    "id": "tb_sym_002",
+    "category": "symptoms",
+    "title": "Improvement Timeline During Treatment",
+    "content": "With proper treatment, most patients start feeling better within 2-4 weeks. Fever usually resolves within 1-2 weeks. Cough improves gradually over 2-4 weeks. Weight gain begins around week 4-6. However, feeling better does NOT mean you are cured — you must complete the full 6-month course. Stopping early leads to relapse and drug resistance.",
+    "keywords": ["better", "membaik", "improve", "improvement", "recover", "sembuh", "when", "kapan", "berapa lama", "how long", "progress", "timeline", "pulih"]
+  },
+  {
+    "id": "tb_sym_003",
+    "category": "symptoms",
+    "title": "Cough and Sputum Changes",
+    "content": "During treatment, your cough should gradually decrease. Initially, sputum may increase as your lungs clear infection. Sputum color may change from yellow/green to clear/white — this indicates improvement. If your cough worsens after initial improvement, produces fresh blood, or you develop new chest pain, contact your healthcare provider immediately. Sputum tests at months 2 and 5 confirm treatment progress.",
+    "keywords": ["cough", "batuk", "sputum", "dahak", "phlegm", "lendir", "blood", "darah", "chest", "dada", "worse", "parah", "memburuk", "batuk darah", "hemoptysis"]
+  },
+  {
+    "id": "tb_sym_004",
+    "category": "symptoms",
+    "title": "Fever Patterns in TB",
+    "content": "TB fever is typically low-grade (37.5-38.5°C), worse in the afternoon and evening, and accompanied by night sweats. Fever should resolve within 1-2 weeks of starting treatment. If fever persists beyond 2 weeks, returns after initial improvement, or becomes high-grade (>39°C), it may indicate treatment failure, drug resistance, or a secondary infection. Report persistent fever to your healthcare provider.",
+    "keywords": ["fever", "demam", "temperature", "suhu", "hot", "panas", "night sweats", "keringat malam", "menggigil", "chills", "badan panas"]
+  },
+  {
+    "id": "tb_sym_005",
+    "category": "symptoms",
+    "title": "Extrapulmonary TB Symptoms",
+    "content": "TB can affect organs beyond the lungs. Lymph node TB: painless neck swelling. Bone/joint TB: back pain, joint swelling. TB meningitis: severe headache, neck stiffness, confusion — this is an emergency. Kidney TB: blood in urine, flank pain. Abdominal TB: stomach pain, bloating. If you develop new symptoms in any body area during treatment, report them to your healthcare provider.",
+    "keywords": ["lymph node", "kelenjar", "bone", "tulang", "joint", "sendi", "meningitis", "headache", "sakit kepala", "kidney", "ginjal", "abdomen", "perut", "swelling", "bengkak", "leher", "neck"]
+  },
+  {
+    "id": "tb_sym_006",
+    "category": "symptoms",
+    "title": "TB in Children — Special Signs",
+    "content": "TB in children may present differently: persistent cough (>2 weeks), failure to thrive or weight loss, persistent fever, reduced playfulness or lethargy, swollen lymph nodes, and poor appetite. Children may not produce sputum. Diagnosis often relies on clinical signs, tuberculin skin test, chest X-ray, and close contact history with a TB patient. Children's treatment uses the same drugs but at weight-adjusted doses.",
+    "keywords": ["child", "anak", "children", "kids", "baby", "bayi", "toddler", "balita", "pediatric", "growing", "tumbuh", "weight", "berat"]
+  },
+  {
+    "id": "tb_sym_007",
+    "category": "symptoms",
+    "title": "When Symptoms Return After Improvement",
+    "content": "If symptoms return after initial improvement during treatment (relapse signs), it may indicate: missed doses, drug resistance, or inadequate drug absorption. Warning signs: return of fever, worsening cough, new weight loss, or night sweats. Do NOT self-adjust medication. Contact your DOTS supervisor or healthcare provider immediately for evaluation and possible sputum re-testing.",
+    "keywords": ["relapse", "kambuh", "return", "kembali", "worse", "memburuk", "parah", "lagi", "again", "ulang", "gagal", "failure", "not working", "tidak berhasil"]
+  },
+  {
+    "id": "tb_sym_008",
+    "category": "symptoms",
+    "title": "Contagiousness and When You Are No Longer Infectious",
+    "content": "Pulmonary TB is spread through airborne droplets when coughing, sneezing, or singing. After starting proper treatment, most patients become significantly less infectious within 2 weeks. However, you should continue to practice cough hygiene (cover mouth, open windows) for at least the first 2-4 weeks. Sputum smear conversion (negative test) confirms reduced infectiousness. Extrapulmonary TB is generally NOT contagious.",
+    "keywords": ["contagious", "menular", "spread", "menyebar", "infectious", "infeksi", "cough", "batuk", "family", "keluarga", "aman", "safe", "mask", "masker", "isolate", "isolasi"]
+  },
+  {
+    "id": "tb_diet_001",
+    "category": "diet",
+    "title": "Nutrition During TB Treatment",
+    "content": "Good nutrition is essential for TB recovery. Eat a balanced diet rich in: protein (eggs, fish, chicken, beans, tofu, tempe), calories (rice, bread, potatoes, sweet potatoes), vitamins and minerals (fruits, vegetables — especially dark leafy greens), and healthy fats (avocado, nuts). Aim for 3 main meals and 2-3 snacks daily. Malnutrition weakens the immune system and slows recovery.",
+    "keywords": ["nutrition", "nutrisi", "food", "makanan", "eat", "makan", "diet", "gizi", "protein", "calorie", "kalori", "vitamin", "healthy", "sehat", "meal"]
+  },
+  {
+    "id": "tb_diet_002",
+    "category": "diet",
+    "title": "Foods to Avoid During TB Treatment",
+    "content": "During TB treatment, avoid or limit: alcohol (increases liver damage risk with TB drugs — STRICTLY avoid), high-fat and fried foods (worsen nausea), caffeine in excess (can interfere with sleep), refined sugars and processed foods, and tobacco/smoking. If you crave certain foods, choose healthier alternatives. Always stay well-hydrated with water (at least 8 glasses daily).",
+    "keywords": ["avoid", "hindari", "jangan", "alcohol", "alkohol", "minum", "drink", "smoking", "rokok", "merokok", "fried", "goreng", "caffeine", "kafein", "kopi", "coffee", "sugar", "gula"]
+  },
+  {
+    "id": "tb_diet_003",
+    "category": "diet",
+    "title": "Foods That Help with Nausea",
+    "content": "If TB medication causes nausea: eat dry crackers or toast before taking medicine, try ginger (tea, candy, or fresh), eat bland foods (rice, bananas, boiled potatoes), avoid strong smells while eating, eat slowly and chew thoroughly, try cold foods (which have less smell), and sip clear fluids between meals. Taking medication before bedtime can help reduce daytime nausea — ask your doctor first.",
+    "keywords": ["nausea", "mual", "vomit", "muntah", "stomach", "perut", "ginger", "jahe", "crackers", "biskuit", "toast", "roti", "bland", "hambar"]
+  },
+  {
+    "id": "tb_diet_004",
+    "category": "diet",
+    "title": "Weight Gain and Recovery Diet",
+    "content": "TB patients often lose significant weight. To regain weight: eat calorie-dense foods (avocado, peanut butter, cheese, full-cream milk), add extra portions of rice or bread, use cooking oil generously, eat protein with every meal, try nutrient-rich traditional foods (bubur kacang hijau, susu kedelai, tempe). Aim to gain 0.5-1 kg per week. Weight gain is a positive sign of recovery.",
+    "keywords": ["weight", "berat badan", "gain", "naik", "thin", "kurus", "skinny", "underweight", "recovery", "pulih", "fat", "gemuk", "calories", "kalori", "protein"]
+  },
+  {
+    "id": "tb_diet_005",
+    "category": "diet",
+    "title": "Hydration During TB Treatment",
+    "content": "Adequate hydration is crucial during TB treatment. Drink at least 8-10 glasses of water daily. Good fluid choices include: plain water, coconut water (air kelapa), fresh fruit juices, warm soups and broths, and herbal teas (ginger, turmeric). Avoid alcohol completely. Adequate hydration helps reduce side effects, supports kidney function, and helps flush medication through the body.",
+    "keywords": ["water", "air", "drink", "minum", "hydration", "hidrasi", "fluid", "cairan", "coconut", "kelapa", "juice", "jus", "thirsty", "haus", "dehidrasi", "dehydration"]
+  },
+  {
+    "id": "tb_diet_006",
+    "category": "diet",
+    "title": "Supplements and Traditional Medicine",
+    "content": "Do not take herbal supplements or traditional medicine (jamu) without consulting your healthcare provider first. Some herbal products can interact with TB medications or cause additional liver stress. Safe supplements typically include: Vitamin B6 (as prescribed), Vitamin D (if deficient), and multivitamins (without iron if liver issues). Always inform your DOTS supervisor about any supplements you take.",
+    "keywords": ["supplement", "suplemen", "herbal", "jamu", "traditional", "tradisional", "vitamin", "mineral", "iron", "zat besi", "alternative", "alternatif"]
+  },
+  {
+    "id": "tb_treat_001",
+    "category": "treatmentProtocol",
+    "title": "DOTS Strategy — Directly Observed Therapy",
+    "content": "DOTS (Directly Observed Therapy, Short-course) is the WHO-recommended strategy for TB treatment. A trained DOTS supervisor (healthcare worker, community volunteer, or family member) watches the patient swallow each dose. This ensures adherence and prevents drug resistance. DOTS is free in Indonesia through puskesmas (community health centers). Your DOTS supervisor is your primary support person throughout treatment.",
+    "keywords": ["dots", "directly observed", "supervisor", "pengawas", "pmo", "pengawas minum obat", "puskesmas", "health center", "free", "gratis", "treatment", "pengobatan"]
+  },
+  {
+    "id": "tb_treat_002",
+    "category": "treatmentProtocol",
+    "title": "Intensive Phase (Months 1-2)",
+    "content": "The intensive phase lasts 2 months and uses all four first-line drugs (HRZE). During this phase: take medication daily (or 3 times per week in some programs), attend all DOTS visits, expect the most side effects during this period, sputum test at the end of month 2 determines if treatment is working. Most patients become non-infectious within 2 weeks of starting this phase.",
+    "keywords": ["intensive", "intensif", "phase", "fase", "month 1", "month 2", "bulan 1", "bulan 2", "awal", "start", "beginning", "mulai", "4fdc"]
+  },
+  {
+    "id": "tb_treat_003",
+    "category": "treatmentProtocol",
+    "title": "Continuation Phase (Months 3-6)",
+    "content": "The continuation phase lasts 4 months and uses only Isoniazid and Rifampicin (HR). Medication is taken daily or 3 times per week. Common mistakes during this phase: stopping medication because you feel well (DANGEROUS), skipping DOTS visits, assuming you are cured. You MUST complete the full 6 months. A sputum test at month 5 confirms cure. Treatment completion certificate is issued after the full course.",
+    "keywords": ["continuation", "lanjutan", "phase", "fase", "month 3", "month 4", "month 5", "month 6", "bulan 3", "bulan 4", "bulan 5", "bulan 6", "2fdc", "selesai", "finish", "complete"]
+  },
+  {
+    "id": "tb_treat_004",
+    "category": "treatmentProtocol",
+    "title": "Sputum Testing Schedule",
+    "content": "Sputum tests (BTA/microscopy) are performed at key points: before treatment (diagnosis), end of month 2 (intensive phase evaluation), month 5 (progress check), and end of month 6 (treatment completion). A positive sputum at month 2 may require extending the intensive phase by 1 month. Two consecutive negative sputum results at months 5 and 6 confirm cure.",
+    "keywords": ["sputum", "dahak", "test", "tes", "bta", "microscopy", "lab", "laboratorium", "check", "periksa", "result", "hasil", "positive", "positif", "negative", "negatif"]
+  },
+  {
+    "id": "tb_treat_005",
+    "category": "treatmentProtocol",
+    "title": "What Happens If Treatment Fails",
+    "content": "Treatment failure is defined as: positive sputum at month 5 or later, or sputum that converts from negative back to positive. Causes include: poor adherence, drug resistance, or malabsorption. If treatment fails, you will be tested for drug-resistant TB (MDR-TB) and may need second-line medications. Treatment failure does NOT mean there is no hope — drug-resistant TB is treatable but requires a longer course with different medications.",
+    "keywords": ["failure", "gagal", "failed", "not working", "tidak berhasil", "resistant", "resisten", "mdr", "still positive", "masih positif", "relapse", "kambuh"]
+  },
+  {
+    "id": "tb_treat_006",
+    "category": "treatmentProtocol",
+    "title": "TB and HIV Co-infection Treatment",
+    "content": "TB is the leading cause of death among people living with HIV. TB treatment should start immediately upon diagnosis, regardless of HIV status. Antiretroviral therapy (ART) should begin within 2-8 weeks of starting TB treatment. Drug interactions between Rifampicin and some ARVs require dose adjustments. Cotrimoxazole prophylaxis is recommended for all TB-HIV patients. Close coordination between TB and HIV care teams is essential.",
+    "keywords": ["hiv", "aids", "co-infection", "koinfeksi", "arv", "antiretroviral", "cd4", "viral load", "cotrimoxazole", "immune", "imun", "daya tahan"]
+  },
+  {
+    "id": "tb_emerg_001",
+    "category": "emergencySigns",
+    "title": "When to Go to the Hospital Immediately",
+    "content": "Seek EMERGENCY medical care if you experience: coughing up large amounts of blood (hemoptysis), severe difficulty breathing or shortness of breath at rest, high fever (>39°C) with confusion or drowsiness, severe chest pain, yellowing of eyes/skin with persistent vomiting (liver failure), severe allergic reaction (swollen face/tongue, difficulty swallowing), or seizures. Go to the nearest emergency room — do not wait for your next DOTS visit.",
+    "keywords": ["emergency", "darurat", "hospital", "rumah sakit", "urgent", "segera", "danger", "bahaya", "critical", "kritis", "blood", "darah", "breathing", "napas", "sesak", "igd"]
+  },
+  {
+    "id": "tb_emerg_002",
+    "category": "emergencySigns",
+    "title": "Signs of Severe Liver Damage",
+    "content": "Severe hepatotoxicity requires immediate hospitalization. Warning signs: dark tea-colored urine, pale or clay-colored stools, yellowing of whites of eyes (jaundice), persistent vomiting (unable to keep food down for >24 hours), severe right-upper abdominal pain, unusual bruising or bleeding, and extreme fatigue with confusion. STOP all TB medications immediately and go to the hospital. Liver damage from TB drugs is usually reversible if caught early.",
+    "keywords": ["liver", "hati", "damage", "kerusakan", "jaundice", "kuning", "dark urine", "urine gelap", "vomiting", "muntah terus", "pain", "nyeri", "stop medication", "berhenti obat", "hepatitis"]
+  },
+  {
+    "id": "tb_emerg_003",
+    "category": "emergencySigns",
+    "title": "Hemoptysis (Coughing Up Blood)",
+    "content": "Coughing up blood (hemoptysis) can occur in TB patients. Small streaks of blood in sputum may be normal during early treatment. However, seek immediate medical attention for: large amounts of blood (>1 tablespoon), blood that is bright red, repeated episodes of bloody cough, bloody cough with dizziness or rapid heartbeat, or bloody cough after months of treatment. Keep calm, sit upright, lean forward slightly, and get to the hospital.",
+    "keywords": ["blood", "darah", "cough blood", "batuk darah", "hemoptysis", "hemoptisis", "sputum", "dahak", "bleeding", "perdarahan", "red", "merah"]
+  },
+  {
+    "id": "tb_emerg_004",
+    "category": "emergencySigns",
+    "title": "Severe Allergic Reactions to TB Drugs",
+    "content": "Severe allergic reactions (anaphylaxis) are rare but life-threatening. Seek emergency care for: difficulty breathing or wheezing, swelling of face, lips, tongue, or throat, widespread rash with blistering or peeling skin (Stevens-Johnson Syndrome), rapid heartbeat with dizziness, and severe hives covering large body areas. STOP medication and call emergency services. After recovery, your treatment regimen will be modified by a specialist.",
+    "keywords": ["allergy", "alergi", "reaction", "reaksi", "anaphylaxis", "severe", "parah", "swelling", "bengkak", "breathing", "napas", "skin", "kulit", "rash", "ruam", "blister"]
+  },
+  {
+    "id": "tb_emerg_005",
+    "category": "emergencySigns",
+    "title": "TB Meningitis Emergency Signs",
+    "content": "TB can spread to the brain lining (meningitis). This is a medical emergency. Warning signs: severe persistent headache that worsens, stiff neck (cannot touch chin to chest), high fever, confusion or altered consciousness, sensitivity to light, nausea and projectile vomiting, seizures, and neck/back stiffness. TB meningitis requires hospitalization, IV medications, and close monitoring. Early treatment is critical to prevent permanent brain damage.",
+    "keywords": ["meningitis", "brain", "otak", "headache", "sakit kepala", "stiff neck", "leher kaku", "confusion", "bingung", "seizure", "kejang", "consciousness", "kesadaran"]
+  },
+  {
+    "id": "tb_emerg_006",
+    "category": "emergencySigns",
+    "title": "Breathing Difficulty and Respiratory Distress",
+    "content": "Difficulty breathing during TB treatment may indicate: pleural effusion (fluid around lungs), pneumothorax (collapsed lung), severe lung damage, or heart problems. Seek emergency care if: you cannot catch your breath at rest, lips or fingertips turn blue, breathing rate is very rapid (>30 breaths/minute), you cannot speak in full sentences due to breathlessness, or chest pain worsens with breathing. Sit upright and stay calm while waiting for help.",
+    "keywords": ["breathing", "napas", "breathless", "sesak", "shortness of breath", "sesak napas", "oxygen", "oksigen", "blue", "biru", "chest", "dada", "lungs", "paru", "paru-paru"]
+  },
+  {
+    "id": "tb_dose_001",
+    "category": "dosing",
+    "title": "Weight-Based Dosing for Adults",
+    "content": "TB drug doses are based on body weight. WHO recommendations for adults: Isoniazid (H): 5 mg/kg/day (max 300 mg), Rifampicin (R): 10 mg/kg/day (max 600 mg), Pyrazinamide (Z): 25 mg/kg/day (max 2000 mg), Ethambutol (E): 15 mg/kg/day (max 1600 mg). In Indonesia, weight categories determine FDC tablet count: 30-37 kg: 2 tablets, 38-54 kg: 3 tablets, 55-70 kg: 4 tablets, >70 kg: 5 tablets of 4FDC during intensive phase.",
+    "keywords": ["dose", "dosis", "weight", "berat badan", "mg", "kg", "how much", "berapa", "tablet", "adult", "dewasa", "calculate", "hitung"]
+  },
+  {
+    "id": "tb_dose_002",
+    "category": "dosing",
+    "title": "Pediatric TB Dosing",
+    "content": "Children's TB drug doses (WHO 2022): Isoniazid: 10 mg/kg/day (range 7-15 mg/kg, max 300 mg), Rifampicin: 15 mg/kg/day (range 10-20 mg/kg, max 600 mg), Pyrazinamide: 35 mg/kg/day (range 30-40 mg/kg), Ethambutol: 20 mg/kg/day (range 15-25 mg/kg). Pediatric FDC formulations are available. Children should be weighed monthly and doses adjusted as they grow. Crushed tablets can be mixed with small amounts of food for young children.",
+    "keywords": ["child", "anak", "pediatric", "baby", "bayi", "dose", "dosis", "weight", "berat", "kid", "kids", "children"]
+  },
+  {
+    "id": "tb_dose_003",
+    "category": "dosing",
+    "title": "Dosing Adjustments for Special Populations",
+    "content": "Dose adjustments may be needed for: kidney disease (reduce Ethambutol, adjust Pyrazinamide based on creatinine clearance), liver disease (avoid Pyrazinamide, monitor closely with Isoniazid and Rifampicin), elderly patients (start with lower doses, monitor closely), pregnant women (standard doses but avoid Streptomycin — it causes fetal hearing damage), and diabetes patients (Rifampicin may reduce effectiveness of diabetes medications).",
+    "keywords": ["kidney", "ginjal", "liver", "hati", "elderly", "lansia", "tua", "pregnant", "hamil", "pregnancy", "kehamilan", "diabetes", "gula darah", "special", "khusus", "adjust", "sesuaikan"]
+  },
+  {
+    "id": "tb_dose_004",
+    "category": "dosing",
+    "title": "Timing of TB Medication",
+    "content": "Take TB medication at the same time every day to maintain consistent blood levels. Best time: morning on an empty stomach (1 hour before breakfast) for optimal absorption. If morning doses cause too much nausea, ask your doctor about taking them before bedtime. Rifampicin absorption is significantly reduced by food — always take on an empty stomach if possible. Space TB medication at least 2 hours from antacids, iron supplements, and calcium.",
+    "keywords": ["time", "waktu", "when", "kapan", "morning", "pagi", "night", "malam", "before meal", "sebelum makan", "after meal", "sesudah makan", "schedule", "jadwal", "jam berapa"]
+  },
+  {
+    "id": "tb_dose_005",
+    "category": "dosing",
+    "title": "What If You Vomit After Taking Medication",
+    "content": "If you vomit within 30 minutes of taking TB medication, retake the full dose. If you vomit between 30-60 minutes, retake half the dose. If more than 60 minutes have passed, do not retake — the medication has likely been absorbed. If vomiting is frequent (happening regularly after medication), contact your healthcare provider. Solutions may include: anti-nausea medication, taking pills before bed, or splitting the dose (only under medical supervision).",
+    "keywords": ["vomit", "muntah", "throw up", "after taking", "setelah minum", "retake", "ulang", "dose again", "minum lagi", "nausea", "mual"]
+  },
+  {
+    "id": "tb_dose_006",
+    "category": "dosing",
+    "title": "Duration of Treatment",
+    "content": "Standard TB treatment lasts exactly 6 months: 2 months intensive phase (HRZE) + 4 months continuation phase (HR). Do NOT stop early even if you feel completely well. Extension to 9 months may be needed for: bone/joint TB, TB meningitis, or if month-2 sputum remains positive. Drug-resistant TB (MDR-TB) treatment lasts 9-20 months. Your DOTS supervisor will confirm your exact treatment end date.",
+    "keywords": ["duration", "berapa lama", "how long", "months", "bulan", "6 months", "9 months", "when finish", "kapan selesai", "stop", "berhenti", "end", "complete", "selesai", "tamat"]
+  }
+]
