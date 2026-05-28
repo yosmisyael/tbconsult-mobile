@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:TBConsult/core/usecases/usecase.dart';
 import 'package:TBConsult/features/auth/domain/usecases/auth_usecases.dart';
@@ -9,15 +10,19 @@ class AuthCubit extends Cubit<AuthState> {
   final LoginUseCase loginUseCase;
   final GetSavedTokenUseCase getSavedTokenUseCase;
   final LogoutUseCase logoutUseCase;
+  final SharedPreferences prefs;
+
+  static const _displayNameKey = 'user_display_name';
 
   AuthCubit({
     required this.registerUseCase,
     required this.loginUseCase,
     required this.getSavedTokenUseCase,
     required this.logoutUseCase,
+    required this.prefs,
   }) : super(const AuthInitial());
 
-  // ── Called by SplashScreen to decide where to route ─────────────────────
+  // ── Check persisted session ───────────────────────────────────────────────
 
   Future<void> checkAuthStatus() async {
     emit(const AuthLoading());
@@ -33,7 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // ── Register ─────────────────────────────────────────────────────────────
+  // ── Register ──────────────────────────────────────────────────────────────
 
   Future<void> register({
     required String email,
@@ -64,6 +69,13 @@ class AuthCubit extends Cubit<AuthState> {
       final token = await loginUseCase(
         LoginParams(email: email, password: password),
       );
+      // Persist the display name so DashboardCubit can read it
+      // without a separate /me endpoint.
+      final name = token.user.fullName?.isNotEmpty == true
+          ? token.user.fullName!
+          : token.user.email.split('@').first;
+      await prefs.setString(_displayNameKey, name);
+
       emit(AuthLoginSuccess(token: token));
     } catch (e) {
       emit(AuthError(message: e.toString()));
@@ -74,6 +86,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     await logoutUseCase(const NoParams());
+    await prefs.remove(_displayNameKey);
     emit(const AuthUnauthenticated());
   }
 }

@@ -1,5 +1,6 @@
 import 'package:TBConsult/features/journey/presentation/cubit/journey_cubit.dart';
 import 'package:TBConsult/features/maps/presentation/cubit/map_cubit.dart';
+import 'package:TBConsult/features/treatment/presentation/cubit/dashboard_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:TBConsult/core/di/injection_container.dart';
@@ -72,7 +73,10 @@ class _OuterShellState extends State<OuterShell> {
           child: const TBConsultHubPage(),
         );
       case 0:
-        return const TreatmentDashboardPage();
+        return BlocProvider<DashboardCubit>(
+          create: (_) => sl<DashboardCubit>(),
+          child: const TreatmentDashboardPage(),
+        );
       case 2:
         return BlocProvider(
           create: (_) => sl<MapCubit>(),

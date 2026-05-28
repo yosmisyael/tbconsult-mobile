@@ -8,6 +8,8 @@ import 'package:TBConsult/features/maps/data/repositories/facility_repository_im
 import 'package:TBConsult/features/maps/domain/repositories/facility_repository.dart';
 import 'package:TBConsult/features/maps/domain/usecases/facility_usecases.dart';
 import 'package:TBConsult/features/maps/presentation/cubit/map_cubit.dart';
+import 'package:TBConsult/features/treatment/domain/usecases/load_dashboard_usecase.dart';
+import 'package:TBConsult/features/treatment/presentation/cubit/dashboard_cubit.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -86,6 +88,7 @@ Future<void> init() async {
       loginUseCase: sl(),
       getSavedTokenUseCase: sl(),
       logoutUseCase: sl(),
+      prefs: sl(),
     ),
   );
 
@@ -108,6 +111,20 @@ Future<void> init() async {
       getRouteUseCase: sl(),
     ),
   );
+
+  // ── Dashboard ─────────────────────────────────────────────────────────────
+  sl.registerLazySingleton(() => LoadDashboardUseCase(
+    journeyRepository: sl(),
+    authRepository: sl(),
+  ));
+
+  // Factory so each time the HOME tab is rebuilt a fresh cubit is created,
+  // which immediately calls load() via initState in the page.
+  sl.registerFactory(() => DashboardCubit(
+    loadDashboardUseCase: sl(),
+    createLogUseCase: sl(),
+    prefs: sl(),
+  ));
 
   // ── Health Hub data sources ────────────────────────────────────────────
   final tbKnowledgeDataSource = TBKnowledgeLocalDataSourceImpl();
