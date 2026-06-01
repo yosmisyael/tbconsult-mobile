@@ -13,7 +13,7 @@ class GeminiRemoteDataSource {
 
   GenerativeModel _getModel(String systemPrompt) {
     return GenerativeModel(
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       apiKey: apiKey,
       systemInstruction: Content.system(systemPrompt),
     );

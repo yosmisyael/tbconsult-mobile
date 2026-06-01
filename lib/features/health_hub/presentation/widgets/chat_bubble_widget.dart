@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:TBConsult/core/theme/app_colors.dart';
 import 'package:TBConsult/features/health_hub/domain/entities/message.dart';
@@ -109,24 +110,66 @@ class ChatBubbleWidget extends StatefulWidget {
 
   static String detectLanguage(String text) {
     final textLower = text.toLowerCase();
-    
+
     // Common Indonesian words
     final indonesianWords = [
-      'dan', 'yang', 'adalah', 'untuk', 'sakit', 'rumah', 'gejala', 'batuk', 'dokter',
-      'terdekat', 'layanan', 'jarak', 'penyakit', 'paru', 'pemeriksaan', 'bisa', 'pada',
-      'tidak', 'dengan', 'kita', 'triage', 'risiko', 'tinggi', 'sedang', 'rendah'
+      'dan',
+      'yang',
+      'adalah',
+      'untuk',
+      'sakit',
+      'rumah',
+      'gejala',
+      'batuk',
+      'dokter',
+      'terdekat',
+      'layanan',
+      'jarak',
+      'penyakit',
+      'paru',
+      'pemeriksaan',
+      'bisa',
+      'pada',
+      'tidak',
+      'dengan',
+      'kita',
+      'triage',
+      'risiko',
+      'tinggi',
+      'sedang',
+      'rendah',
     ];
-    
+
     // Common English words
     final englishWords = [
-      'the', 'and', 'is', 'you', 'for', 'cough', 'hospital', 'symptoms', 'doctor',
-      'nearest', 'distance', 'disease', 'lung', 'checkup', 'can', 'with', 'triage',
-      'risk', 'high', 'moderate', 'low', 'assessment', 'sdui'
+      'the',
+      'and',
+      'is',
+      'you',
+      'for',
+      'cough',
+      'hospital',
+      'symptoms',
+      'doctor',
+      'nearest',
+      'distance',
+      'disease',
+      'lung',
+      'checkup',
+      'can',
+      'with',
+      'triage',
+      'risk',
+      'high',
+      'moderate',
+      'low',
+      'assessment',
+      'sdui',
     ];
-    
+
     int idScore = 0;
     int enScore = 0;
-    
+
     final words = textLower.split(RegExp(r'\s+'));
     for (var word in words) {
       final cleanWord = word.replaceAll(RegExp(r'[^\w]'), '');
@@ -137,7 +180,7 @@ class ChatBubbleWidget extends StatefulWidget {
         enScore++;
       }
     }
-    
+
     return enScore > idScore ? 'en-US' : 'id-ID';
   }
 
@@ -167,15 +210,26 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
   @override
   void initState() {
     super.initState();
-    _editController = TextEditingController(text: widget.message.content);
+    _editController = TextEditingController(text: _getEditText(widget.message));
   }
 
   @override
   void didUpdateWidget(ChatBubbleWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.message.content != widget.message.content) {
-      _editController.text = widget.message.content;
+      _editController.text = _getEditText(widget.message);
     }
+  }
+
+  String _getEditText(Message msg) {
+    if (msg.type == MessageType.image) {
+      final parts = msg.content.split('|');
+      if (parts.length > 1) {
+        return parts[1];
+      }
+      return '';
+    }
+    return msg.content;
   }
 
   @override
@@ -222,16 +276,23 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
       String selectedVoiceName = targetPersona.voiceName;
 
       if (voices != null) {
-        String targetNormalized = targetPersona.voiceName.toLowerCase().replaceAll(RegExp(r'[-_x]'), '');
-        
+        String targetNormalized = targetPersona.voiceName
+            .toLowerCase()
+            .replaceAll(RegExp(r'[-_x]'), '');
+
         for (var v in voices) {
           if (v is Map) {
             final name = v['name']?.toString();
             if (name != null) {
-              String nameNormalized = name.toLowerCase().replaceAll(RegExp(r'[-_x]'), '');
+              String nameNormalized = name.toLowerCase().replaceAll(
+                RegExp(r'[-_x]'),
+                '',
+              );
               if (nameNormalized == targetNormalized) {
                 selectedVoiceName = name;
-                debugPrint("TTS: Resolved matching voice name to: $selectedVoiceName");
+                debugPrint(
+                  "TTS: Resolved matching voice name to: $selectedVoiceName",
+                );
                 break;
               }
             }
@@ -240,25 +301,40 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
       }
 
       if (voices != null && selectedVoiceName == targetPersona.voiceName) {
-        debugPrint("TTS: Exact voice '$selectedVoiceName' not found. Available voices for this locale:");
+        debugPrint(
+          "TTS: Exact voice '$selectedVoiceName' not found. Available voices for this locale:",
+        );
         for (var v in voices) {
           if (v is Map) {
             final name = v['name']?.toString();
             final locale = v['locale']?.toString() ?? v['language']?.toString();
-            if (locale != null && locale.toLowerCase().replaceAll('_', '-').startsWith(targetPersona.locale.toLowerCase().replaceAll('_', '-').substring(0, 2))) {
+            if (locale != null &&
+                locale
+                    .toLowerCase()
+                    .replaceAll('_', '-')
+                    .startsWith(
+                      targetPersona.locale
+                          .toLowerCase()
+                          .replaceAll('_', '-')
+                          .substring(0, 2),
+                    )) {
               debugPrint("  - $name ($locale)");
             }
           }
         }
       }
 
-      debugPrint("TTS: Setting voice: $selectedVoiceName (${targetPersona.locale})");
+      debugPrint(
+        "TTS: Setting voice: $selectedVoiceName (${targetPersona.locale})",
+      );
       await _flutterTts.setVoice({
         'name': selectedVoiceName,
         'locale': targetPersona.locale,
       });
 
-      debugPrint("TTS: Applying tuned pitch ${targetPersona.pitch}, speech rate ${targetPersona.speechRate}, and volume 1.0 for ${targetPersona.name}");
+      debugPrint(
+        "TTS: Applying tuned pitch ${targetPersona.pitch}, speech rate ${targetPersona.speechRate}, and volume 1.0 for ${targetPersona.name}",
+      );
       await _flutterTts.setVolume(1.0);
       await _flutterTts.setPitch(targetPersona.pitch);
       await _flutterTts.setSpeechRate(targetPersona.speechRate);
@@ -328,7 +404,9 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
-        crossAxisAlignment: isBot ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        crossAxisAlignment: isBot
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
         children: [
           isBot ? _buildBotBubble(context) : _buildUserBubble(context),
           if (!_isEditing) _buildBubbleActions(context),
@@ -338,10 +416,15 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
   }
 
   Widget _buildBotBubble(BuildContext context) {
-    final hasRisk = widget.message.riskLevel != null && widget.message.riskLevel!.isNotEmpty;
+    final hasRisk =
+        widget.message.riskLevel != null &&
+        widget.message.riskLevel!.isNotEmpty;
     final risk = widget.message.riskLevel;
-    final hasRedFlags = widget.message.redFlags != null && widget.message.redFlags!.isNotEmpty;
-    final hasSdui = widget.message.sdui != null && widget.message.sdui!['components'] != null;
+    final hasRedFlags =
+        widget.message.redFlags != null && widget.message.redFlags!.isNotEmpty;
+    final hasSdui =
+        widget.message.sdui != null &&
+        widget.message.sdui!['components'] != null;
 
     Color riskColor = Colors.grey;
     IconData riskIcon = Icons.info_outline;
@@ -394,7 +477,10 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                 if (hasRisk)
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     color: riskColor.withAlpha(25),
                     child: Row(
                       children: [
@@ -432,7 +518,11 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                             children: [
                               const Row(
                                 children: [
-                                  Icon(Icons.gpp_bad_outlined, color: Color(0xFFC62828), size: 16),
+                                  Icon(
+                                    Icons.gpp_bad_outlined,
+                                    color: Color(0xFFC62828),
+                                    size: 16,
+                                  ),
                                   SizedBox(width: 6),
                                   Text(
                                     "Red Flags Detected:",
@@ -445,17 +535,22 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              ...widget.message.redFlags!.map((flag) => Padding(
-                                    padding: const EdgeInsets.only(left: 22, top: 2),
-                                    child: Text(
-                                      "• $flag",
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xFFB71C1C),
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                              ...widget.message.redFlags!.map(
+                                (flag) => Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 22,
+                                    top: 2,
+                                  ),
+                                  child: Text(
+                                    "• $flag",
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xFFB71C1C),
+                                      fontWeight: FontWeight.w500,
                                     ),
-                                  )),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -464,13 +559,18 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                       Theme(
                         data: Theme.of(context).copyWith(
                           textSelectionTheme: TextSelectionThemeData(
-                            selectionColor: AppColors.primary.withValues(alpha: 0.2),
+                            selectionColor: AppColors.primary.withValues(
+                              alpha: 0.2,
+                            ),
                             selectionHandleColor: AppColors.primary,
                           ),
                         ),
                         child: SelectionArea(
                           child: MarkdownBody(
-                            data: widget.message.content.replaceAll(' •', '\n•'),
+                            data: widget.message.content.replaceAll(
+                              ' •',
+                              '\n•',
+                            ),
                             styleSheet: MarkdownStyleSheet(
                               p: const TextStyle(
                                 fontSize: 15,
@@ -490,7 +590,10 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                       // 4. Server-Driven UI (SDUI) Buttons / Components
                       if (hasSdui) ...[
                         const SizedBox(height: 12),
-                        ..._buildSduiComponents(context, widget.message.sdui!['components'] as List<dynamic>),
+                        ..._buildSduiComponents(
+                          context,
+                          widget.message.sdui!['components'] as List<dynamic>,
+                        ),
                       ],
                     ],
                   ),
@@ -504,7 +607,10 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
     );
   }
 
-  List<Widget> _buildSduiComponents(BuildContext context, List<dynamic> components) {
+  List<Widget> _buildSduiComponents(
+    BuildContext context,
+    List<dynamic> components,
+  ) {
     final List<Widget> list = [];
     for (final comp in components) {
       if (comp is Map<String, dynamic>) {
@@ -518,38 +624,81 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
               padding: const EdgeInsets.only(top: 8.0),
               child: SizedBox(
                 width: double.infinity,
-                child: ElevatedButton.icon(
+                child: ElevatedButton(
                   onPressed: () {
-                    if (action == 'visit_dots' ||
+                    if (action == 'call_facility') {
+                      final phone = comp['phone'] as String?;
+                      if (phone != null) {
+                        final cleaned = phone.replaceAll(RegExp(r'[^0-9+]'), '');
+                        final uri = Uri.parse('tel:$cleaned');
+                        canLaunchUrl(uri).then((canLaunch) {
+                          if (canLaunch) {
+                            launchUrl(uri);
+                          }
+                        });
+                      }
+                    } else if (action == 'visit_dots' ||
                         action == 'consult' ||
                         action == 'contact_nutritionist' ||
                         action == 'consult_doctor') {
                       final state = OuterShell.navKey.currentState;
+                      final facilityId = comp['facility_id'] as String?;
                       if (state != null) {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
                         }
-                        state.setSelectedIndex(2);
+                        if (action == 'visit_dots') {
+                          state.navigateToMap(facilityId: facilityId);
+                        } else {
+                          state.setSelectedIndex(2);
+                        }
                       } else {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => OuterShell(initialIndex: 2),
+                            builder: (_) => OuterShell(
+                              initialIndex: 2,
+                              facilityId: action == 'visit_dots' ? facilityId : null,
+                            ),
                           ),
                           (_) => false,
                         );
                       }
                     }
                   },
-                  icon: const Icon(Icons.map_outlined, size: 16),
-                  label: Text(label),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        action == 'call_facility'
+                            ? Icons.phone_outlined
+                            : (action == 'visit_dots'
+                                ? Icons.map_outlined
+                                : Icons.chat_outlined),
+                        size: 16,
+                      ),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          label,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -564,6 +713,20 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
   Widget _buildUserBubble(BuildContext context) {
     final isImage = widget.message.type == MessageType.image;
 
+    String imagePathsString = '';
+    String promptText = '';
+    if (isImage) {
+      final parts = widget.message.content.split('|');
+      imagePathsString = parts[0];
+      if (parts.length > 1) {
+        promptText = parts[1];
+      }
+    }
+
+    final List<String> imagePaths = imagePathsString.isNotEmpty
+        ? imagePathsString.split(',')
+        : [];
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -573,17 +736,35 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              if (isImage && File(widget.message.content).existsSync())
+              if (isImage && imagePaths.isNotEmpty && !_isEditing)
                 Container(
                   margin: const EdgeInsets.only(bottom: 8),
-                  constraints:
-                      const BoxConstraints(maxHeight: 200, maxWidth: 200),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      image: FileImage(File(widget.message.content)),
-                      fit: BoxFit.cover,
-                    ),
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    alignment: WrapAlignment.end,
+                    children: imagePaths
+                        .where((path) => File(path).existsSync())
+                        .map((path) {
+                          return Container(
+                            constraints: const BoxConstraints(
+                              maxHeight: 200,
+                              maxWidth: 200,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: FileImage(File(path)),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            width: imagePaths.length > 1
+                                ? 150
+                                : 200, // Slightly smaller if multiple
+                            height: imagePaths.length > 1 ? 150 : 200,
+                          );
+                        })
+                        .toList(),
                   ),
                 ),
               Container(
@@ -608,7 +789,11 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                         ),
                         child: SelectionArea(
                           child: Text(
-                            isImage ? '📸 Image attached' : widget.message.content,
+                            isImage
+                                ? (promptText.isNotEmpty
+                                      ? promptText
+                                      : '📸 Image attached')
+                                : widget.message.content,
                             style: const TextStyle(
                               fontSize: 15,
                               color: AppColors.background,
@@ -626,10 +811,43 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
   }
 
   Widget _buildBalloonEditField(BuildContext context) {
+    final isImage = widget.message.type == MessageType.image;
+    String imagePathsString = '';
+    if (isImage) {
+      final parts = widget.message.content.split('|');
+      imagePathsString = parts[0];
+    }
+
+    final List<String> imagePaths = imagePathsString.isNotEmpty
+        ? imagePathsString.split(',')
+        : [];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
+        if (isImage && imagePaths.isNotEmpty)
+          Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: imagePaths.where((path) => File(path).existsSync()).map(
+                (path) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.file(
+                      File(path),
+                      height: 80,
+                      width: 80,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
         TextField(
           controller: _editController,
           maxLines: null,
@@ -654,11 +872,15 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
               onTap: () {
                 setState(() {
                   _isEditing = false;
-                  _editController.text = widget.message.content; // revert changes
+                  _editController.text =
+                      widget.message.content; // revert changes
                 });
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
@@ -688,11 +910,16 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
                   setState(() {
                     _isEditing = false;
                   });
-                  context.read<ConversationCubit>().editAndResendLatestMessage(text);
+                  context.read<ConversationCubit>().editAndResendLatestMessage(
+                    text,
+                  );
                 }
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -722,7 +949,7 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
 
   Widget _buildBubbleActions(BuildContext context) {
     final isUser = widget.message.role == MessageRole.user;
-    
+
     return Padding(
       padding: EdgeInsets.only(
         top: 6,
@@ -730,7 +957,9 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
         right: isUser ? 4 : 0,
       ),
       child: Row(
-        mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: [
           _buildActionButton(
             icon: Icons.copy_all_outlined,
@@ -745,7 +974,10 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
               onTap: _toggleSpeak,
             ),
           ],
-          if (isUser && widget.isLatestUserMessage && widget.message.type == MessageType.text) ...[
+          if (isUser &&
+              widget.isLatestUserMessage &&
+              (widget.message.type == MessageType.text ||
+                  widget.message.type == MessageType.image)) ...[
             const SizedBox(width: 8),
             _buildActionButton(
               icon: Icons.edit_outlined,
@@ -761,16 +993,25 @@ class _ChatBubbleWidgetState extends State<ChatBubbleWidget> {
     );
   }
 
-  Widget _buildActionButton({required IconData icon, required VoidCallback onTap}) {
+  Widget _buildActionButton({
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
     return Container(
       width: 32,
       height: 32,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.primary.withValues(alpha: 0.12), // Soft primary color circle
+        color: AppColors.primary.withValues(
+          alpha: 0.12,
+        ), // Soft primary color circle
       ),
       child: IconButton(
-        icon: Icon(icon, size: 14, color: AppColors.primary), // Icon matches primary color palette
+        icon: Icon(
+          icon,
+          size: 14,
+          color: AppColors.primary,
+        ), // Icon matches primary color palette
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(),
         onPressed: onTap,

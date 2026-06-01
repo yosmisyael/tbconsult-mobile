@@ -22,10 +22,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class OuterShell extends StatefulWidget {
   final int initialIndex;
+  final String? facilityId;
   
   static final GlobalKey<OuterShellState> navKey = GlobalKey<OuterShellState>();
 
-  OuterShell({int? initialIndex, Key? key})
+  OuterShell({int? initialIndex, this.facilityId, Key? key})
       : initialIndex = initialIndex ?? 0,
         super(key: key ?? navKey);
 
@@ -39,6 +40,8 @@ class OuterShellState extends State<OuterShell> {
   DateTime? _lastPressedBack;
   Timer? _sessionPingTimer;
 
+  late final MapCubit _mapCubit = sl<MapCubit>();
+
   late final List<Widget> _pages = [
     BlocProvider<DashboardCubit>(
       create: (_) => sl<DashboardCubit>(),
@@ -48,8 +51,8 @@ class OuterShellState extends State<OuterShell> {
       create: (_) => sl<HealthHubCubit>()..loadRecentConversations(),
       child: const TBConsultHubPage(),
     ),
-    BlocProvider<MapCubit>(
-      create: (_) => sl<MapCubit>(),
+    BlocProvider<MapCubit>.value(
+      value: _mapCubit,
       child: const MapPage(),
     ),
     BlocProvider<JourneyCubit>(
@@ -66,12 +69,27 @@ class OuterShellState extends State<OuterShell> {
     }
   }
 
+  void navigateToMap({String? facilityId}) {
+    setSelectedIndex(2);
+    if (facilityId != null) {
+      Future.delayed(const Duration(milliseconds: 150), () {
+        _mapCubit.selectFacilityById(facilityId);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
     _checkSessionValidity();
     _startSessionPingTimer();
+
+    if (widget.facilityId != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        navigateToMap(facilityId: widget.facilityId);
+      });
+    }
   }
 
   @override

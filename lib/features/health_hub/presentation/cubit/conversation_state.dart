@@ -17,7 +17,7 @@ class ConversationInitial extends ConversationState {
 
 class ConversationReady extends ConversationState {
   const ConversationReady({required Conversation conversation})
-      : super(conversation: conversation);
+    : super(conversation: conversation);
 }
 
 class ConversationMessaging extends ConversationState {
@@ -34,30 +34,27 @@ class ConversationMessaging extends ConversationState {
 
   @override
   List<Object?> get props => [
-        conversation,
-        isWaitingForResponse,
-        isListening,
-        isTranscribing,
-      ];
+    conversation,
+    isWaitingForResponse,
+    isListening,
+    isTranscribing,
+  ];
 }
 
 class ConversationSummarizing extends ConversationState {
   const ConversationSummarizing({required Conversation conversation})
-      : super(conversation: conversation);
+    : super(conversation: conversation);
 }
 
 class ConversationSummarized extends ConversationState {
   const ConversationSummarized({required Conversation conversation})
-      : super(conversation: conversation);
+    : super(conversation: conversation);
 }
 
 class ConversationError extends ConversationState {
   final String message;
 
-  const ConversationError({
-    super.conversation,
-    required this.message,
-  });
+  const ConversationError({super.conversation, required this.message});
 
   @override
   List<Object?> get props => [conversation, message];

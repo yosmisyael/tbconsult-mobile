@@ -42,7 +42,7 @@ class SendMessageUseCase extends UseCase<Message, SendMessageParams> {
       systemPrompt: systemPrompt,
       history: history,
       sessionId: params.conversationId,
-      imageBytes: params.imageBytes,
+      imagesBytes: params.imagesBytes,
     );
 
     // 5. Create the assistant Message entity with rich backend details
@@ -114,7 +114,7 @@ abstract class TriageService {
     required String systemPrompt,
     required List<Map<String, String>> history,
     required String sessionId,
-    List<int>? imageBytes,
+    List<List<int>>? imagesBytes,
   });
 
   Future<String> generateConversationSummary(List<Message> messages);
@@ -125,14 +125,14 @@ class SendMessageParams extends Equatable {
   final String userMessage;
   final String responseMessageId;
   final List<Message> conversationMessages;
-  final List<int>? imageBytes;
+  final List<List<int>>? imagesBytes;
 
   const SendMessageParams({
     required this.conversationId,
     required this.userMessage,
     required this.responseMessageId,
     required this.conversationMessages,
-    this.imageBytes,
+    this.imagesBytes,
   });
 
   @override
@@ -141,7 +141,7 @@ class SendMessageParams extends Equatable {
         userMessage,
         responseMessageId,
         conversationMessages,
-        imageBytes,
+        imagesBytes,
       ];
 }
 

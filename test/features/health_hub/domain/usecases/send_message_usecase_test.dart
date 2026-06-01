@@ -70,7 +70,7 @@ class MockTriageService implements TriageService {
     required String systemPrompt,
     required List<Map<String, String>> history,
     required String sessionId,
-    List<int>? imageBytes,
+    List<List<int>>? imagesBytes,
   }) async {
     lastUserMessage = userMessage;
     lastSystemPrompt = systemPrompt;

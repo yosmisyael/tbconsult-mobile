@@ -18,7 +18,10 @@ class AllConversationsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Conversation History',
-          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: AppColors.primary,
+          ),
         ),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.primary,
@@ -86,7 +89,10 @@ class AllConversationsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildDismissibleChatCard(BuildContext context, Conversation conversation) {
+  Widget _buildDismissibleChatCard(
+    BuildContext context,
+    Conversation conversation,
+  ) {
     return Dismissible(
       key: Key(conversation.id),
       direction: DismissDirection.endToStart,
@@ -136,8 +142,10 @@ class AllConversationsPage extends StatelessWidget {
                   color: AppColors.primaryLight.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.chat_bubble_outline,
-                    color: AppColors.primary),
+                child: const Icon(
+                  Icons.chat_bubble_outline,
+                  color: AppColors.primary,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -195,29 +203,46 @@ class AllConversationsPage extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Hapus Riwayat Chat?', style: TextStyle(fontWeight: FontWeight.bold)),
-        content: const Text('Apakah Anda yakin ingin menghapus riwayat chat ini? Tindakan ini tidak dapat dibatalkan.'),
+        title: const Text(
+          'Hapus Riwayat Chat?',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: const Text(
+          'Apakah Anda yakin ingin menghapus riwayat chat ini? Tindakan ini tidak dapat dibatalkan.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Batal', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+            child: const Text(
+              'Batal',
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Hapus', style: TextStyle(color: Colors.red.shade700, fontWeight: FontWeight.bold)),
+            child: Text(
+              'Hapus',
+              style: TextStyle(
+                color: Colors.red.shade700,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  void _navigateToExistingConversation(BuildContext context, String conversationId) {
+  void _navigateToExistingConversation(
+    BuildContext context,
+    String conversationId,
+  ) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => BlocProvider<ConversationCubit>(
-          create: (_) => sl<ConversationCubit>()
-            ..loadExistingConversation(conversationId),
+          create: (_) =>
+              sl<ConversationCubit>()..loadExistingConversation(conversationId),
           child: const TBConsultConversationPage(),
         ),
       ),

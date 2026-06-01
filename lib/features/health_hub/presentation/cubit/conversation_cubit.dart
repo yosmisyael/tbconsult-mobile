@@ -42,8 +42,7 @@ class ConversationCubit extends Cubit<ConversationState> {
 
   Future<void> loadExistingConversation(String conversationId) async {
     try {
-      final conversation =
-          await getConversationDetailUseCase(conversationId);
+      final conversation = await getConversationDetailUseCase(conversationId);
       if (conversation != null) {
         if (conversation.hasSummary) {
           emit(ConversationSummarized(conversation: conversation));
@@ -93,19 +92,23 @@ class ConversationCubit extends Cubit<ConversationState> {
     // Save user message immediately (crash safety)
     await saveConversationUseCase(withUserMsg);
 
-    emit(ConversationMessaging(
-      conversation: withUserMsg,
-      isWaitingForResponse: true,
-    ));
+    emit(
+      ConversationMessaging(
+        conversation: withUserMsg,
+        isWaitingForResponse: true,
+      ),
+    );
 
     try {
       final responseId = _uuid.v4();
-      final assistantMessage = await sendMessageUseCase(SendMessageParams(
-        conversationId: conversation.id,
-        userMessage: text.trim(),
-        responseMessageId: responseId,
-        conversationMessages: conversation.messages,
-      ));
+      final assistantMessage = await sendMessageUseCase(
+        SendMessageParams(
+          conversationId: conversation.id,
+          userMessage: text.trim(),
+          responseMessageId: responseId,
+          conversationMessages: conversation.messages,
+        ),
+      );
 
       final withBotMsg = withUserMsg.copyWith(
         lastMessageAt: assistantMessage.timestamp,
@@ -115,10 +118,12 @@ class ConversationCubit extends Cubit<ConversationState> {
       await saveConversationUseCase(withBotMsg);
       emit(ConversationMessaging(conversation: withBotMsg));
     } catch (e) {
-      emit(ConversationError(
-        conversation: withUserMsg,
-        message: 'Failed: ${e.toString().replaceAll('Exception: ', '')}',
-      ));
+      emit(
+        ConversationError(
+          conversation: withUserMsg,
+          message: 'Failed: ${e.toString().replaceAll('Exception: ', '')}',
+        ),
+      );
     }
   }
 
@@ -132,7 +137,7 @@ class ConversationCubit extends Cubit<ConversationState> {
     }
 
     final messages = List<Message>.from(conversation.messages);
-    
+
     // Find last user message index
     int lastUserIndex = -1;
     for (int i = messages.length - 1; i >= 0; i--) {
@@ -141,7 +146,7 @@ class ConversationCubit extends Cubit<ConversationState> {
         break;
       }
     }
-    
+
     if (lastUserIndex == -1) return;
 
     final subList = messages.sublist(0, lastUserIndex);
@@ -167,19 +172,23 @@ class ConversationCubit extends Cubit<ConversationState> {
 
     await saveConversationUseCase(withUserMsg);
 
-    emit(ConversationMessaging(
-      conversation: withUserMsg,
-      isWaitingForResponse: true,
-    ));
+    emit(
+      ConversationMessaging(
+        conversation: withUserMsg,
+        isWaitingForResponse: true,
+      ),
+    );
 
     try {
       final responseId = _uuid.v4();
-      final assistantMessage = await sendMessageUseCase(SendMessageParams(
-        conversationId: conversation.id,
-        userMessage: text.trim(),
-        responseMessageId: responseId,
-        conversationMessages: subList,
-      ));
+      final assistantMessage = await sendMessageUseCase(
+        SendMessageParams(
+          conversationId: conversation.id,
+          userMessage: text.trim(),
+          responseMessageId: responseId,
+          conversationMessages: subList,
+        ),
+      );
 
       final withBotMsg = withUserMsg.copyWith(
         lastMessageAt: assistantMessage.timestamp,
@@ -189,23 +198,29 @@ class ConversationCubit extends Cubit<ConversationState> {
       await saveConversationUseCase(withBotMsg);
       emit(ConversationMessaging(conversation: withBotMsg));
     } catch (e) {
-      emit(ConversationError(
-        conversation: withUserMsg,
-        message: 'Failed: ${e.toString().replaceAll('Exception: ', '')}',
-      ));
+      emit(
+        ConversationError(
+          conversation: withUserMsg,
+          message: 'Failed: ${e.toString().replaceAll('Exception: ', '')}',
+        ),
+      );
     }
   }
 
-  Future<void> sendImageMessage(File image) async {
+  Future<void> sendImageMessage(List<File> images, {String? prompt}) async {
     final conversation = state.conversation;
     if (conversation == null) return;
+
+    final String finalPrompt =
+        prompt ??
+        'What do you see in this image? Analyze it for any TB-related health concerns.';
 
     final userMessage = Message(
       id: _uuid.v4(),
       conversationId: conversation.id,
       role: MessageRole.user,
       type: MessageType.image,
-      content: image.path,
+      content: '${images.map((e) => e.path).join(',')}|$finalPrompt',
       timestamp: DateTime.now(),
     );
 
@@ -216,21 +231,28 @@ class ConversationCubit extends Cubit<ConversationState> {
 
     await saveConversationUseCase(withUserMsg);
 
-    emit(ConversationMessaging(
-      conversation: withUserMsg,
-      isWaitingForResponse: true,
-    ));
+    emit(
+      ConversationMessaging(
+        conversation: withUserMsg,
+        isWaitingForResponse: true,
+      ),
+    );
 
     try {
-      final imageBytes = await image.readAsBytes();
+      final List<List<int>> imageBytesList = [];
+      for (var img in images) {
+        imageBytesList.add(await img.readAsBytes());
+      }
       final responseId = _uuid.v4();
-      final assistantMessage = await sendMessageUseCase(SendMessageParams(
-        conversationId: conversation.id,
-        userMessage: 'What do you see in this image? Analyze it for any TB-related health concerns.',
-        responseMessageId: responseId,
-        conversationMessages: conversation.messages,
-        imageBytes: imageBytes.toList(),
-      ));
+      final assistantMessage = await sendMessageUseCase(
+        SendMessageParams(
+          conversationId: conversation.id,
+          userMessage: finalPrompt,
+          responseMessageId: responseId,
+          conversationMessages: conversation.messages,
+          imagesBytes: imageBytesList,
+        ),
+      );
 
       final withBotMsg = withUserMsg.copyWith(
         lastMessageAt: assistantMessage.timestamp,
@@ -240,10 +262,12 @@ class ConversationCubit extends Cubit<ConversationState> {
       await saveConversationUseCase(withBotMsg);
       emit(ConversationMessaging(conversation: withBotMsg));
     } catch (e) {
-      emit(ConversationError(
-        conversation: withUserMsg,
-        message: 'Failed to analyze image. Please try again.',
-      ));
+      emit(
+        ConversationError(
+          conversation: withUserMsg,
+          message: 'Failed to analyze image. Please try again.',
+        ),
+      );
     }
   }
 
@@ -252,19 +276,15 @@ class ConversationCubit extends Cubit<ConversationState> {
   void startListening() {
     final conversation = state.conversation;
     if (conversation == null) return;
-    emit(ConversationMessaging(
-      conversation: conversation,
-      isListening: true,
-    ));
+    emit(ConversationMessaging(conversation: conversation, isListening: true));
   }
 
   void stopListening() {
     final conversation = state.conversation;
     if (conversation == null) return;
-    emit(ConversationMessaging(
-      conversation: conversation,
-      isTranscribing: true,
-    ));
+    emit(
+      ConversationMessaging(conversation: conversation, isTranscribing: true),
+    );
   }
 
   void finishTranscription() {
@@ -287,10 +307,12 @@ class ConversationCubit extends Cubit<ConversationState> {
       );
       emit(ConversationSummarized(conversation: summarized));
     } catch (e) {
-      emit(ConversationError(
-        conversation: conversation,
-        message: 'Failed to generate summary.',
-      ));
+      emit(
+        ConversationError(
+          conversation: conversation,
+          message: 'Failed to generate summary.',
+        ),
+      );
     }
   }
 

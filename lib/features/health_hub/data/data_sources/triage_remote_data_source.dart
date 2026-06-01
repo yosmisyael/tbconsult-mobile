@@ -92,7 +92,7 @@ class TriageRemoteDataSource implements TriageService {
     required String systemPrompt,
     required List<Map<String, String>> history,
     required String sessionId,
-    List<int>? imageBytes,
+    List<List<int>>? imagesBytes,
   }) async {
     try {
       final backendUrl = _getBackendUrl();
@@ -115,6 +115,11 @@ class TriageRemoteDataSource implements TriageService {
         debugPrint('TriageRemoteDataSource: location fetch error: $e');
       }
 
+      // Encode images as base64 strings for the backend to analyze
+      final List<String>? base64Images = imagesBytes?.map(
+        (bytes) => base64Encode(bytes),
+      ).toList();
+
       final response = await http
           .post(
             chatUri,
@@ -126,8 +131,10 @@ class TriageRemoteDataSource implements TriageService {
               'session_id': sessionId,
               'message': userMessage,
               'history': history,
-              if (lat != null) 'latitude': lat,
-              if (lng != null) 'longitude': lng,
+              'latitude':? lat,
+              'longitude':? lng,
+              if (base64Images != null && base64Images.isNotEmpty)
+                'images': base64Images,
             }),
           )
           .timeout(const Duration(seconds: 120));
@@ -144,7 +151,6 @@ class TriageRemoteDataSource implements TriageService {
         );
       }
     } catch (e) {
-      // Graceful fallback to local/direct Gemini API
       debugPrint(
         'TriageRemoteDataSource: Backend call failed ($e). Falling back to direct Gemini...',
       );
@@ -153,7 +159,7 @@ class TriageRemoteDataSource implements TriageService {
           userMessage: userMessage,
           systemPrompt: systemPrompt,
           history: history,
-          imageBytes: imageBytes,
+          imagesBytes: imagesBytes,
         );
       } catch (geminiError) {
         debugPrint(
@@ -194,10 +200,10 @@ class TriageRemoteDataSource implements TriageService {
     required String userMessage,
     required String systemPrompt,
     required List<Map<String, String>> history,
-    List<int>? imageBytes,
+    List<List<int>>? imagesBytes,
   }) async {
     _geminiModel = GenerativeModel(
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       apiKey: apiKey,
       systemInstruction: Content.system(systemPrompt),
     );
@@ -225,8 +231,10 @@ class TriageRemoteDataSource implements TriageService {
     _geminiChatSession = _geminiModel!.startChat(history: historyContent);
 
     final List<Part> parts = [TextPart(userMessage)];
-    if (imageBytes != null && imageBytes.isNotEmpty) {
-      parts.add(DataPart('image/jpeg', Uint8List.fromList(imageBytes)));
+    if (imagesBytes != null && imagesBytes.isNotEmpty) {
+      for (final bytes in imagesBytes) {
+        parts.add(DataPart('image/jpeg', Uint8List.fromList(bytes)));
+      }
     }
 
     final response = await _geminiChatSession!.sendMessage(
@@ -293,7 +301,7 @@ class TriageRemoteDataSource implements TriageService {
   @override
   Future<String> generateConversationSummary(List<Message> messages) async {
     final model = GenerativeModel(
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       apiKey: apiKey,
       systemInstruction: Content.system(_summarySystemPrompt),
     );

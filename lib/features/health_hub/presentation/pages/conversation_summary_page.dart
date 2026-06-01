@@ -58,7 +58,11 @@ class ConversationSummaryPage extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          left: 16.0, right: 20.0, top: 12.0, bottom: 8.0),
+        left: 16.0,
+        right: 20.0,
+        top: 12.0,
+        bottom: 8.0,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -91,8 +95,18 @@ class ConversationSummaryPage extends StatelessWidget {
   Widget _buildTimestampRow() {
     final date = conversation.startedAt;
     final months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     final hour = date.hour.toString().padLeft(2, '0');
     final minute = date.minute.toString().padLeft(2, '0');
@@ -101,14 +115,15 @@ class ConversationSummaryPage extends StatelessWidget {
 
     return Row(
       children: [
-        const Icon(Icons.calendar_today, size: 14, color: AppColors.textSecondary),
+        const Icon(
+          Icons.calendar_today,
+          size: 14,
+          color: AppColors.textSecondary,
+        ),
         const SizedBox(width: 6),
         Text(
           formatted,
-          style: const TextStyle(
-            fontSize: 13,
-            color: AppColors.textSecondary,
-          ),
+          style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
         ),
       ],
     );
@@ -140,8 +155,11 @@ class ConversationSummaryPage extends StatelessWidget {
                   color: Color(0xFFE8F5E9),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.description_outlined,
-                    color: AppColors.primary, size: 18),
+                child: const Icon(
+                  Icons.description_outlined,
+                  color: AppColors.primary,
+                  size: 18,
+                ),
               ),
               const SizedBox(width: 12),
               const Text(
@@ -198,8 +216,11 @@ class ConversationSummaryPage extends StatelessWidget {
                   color: Color(0xFFFFF8E1),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.monitor_heart,
-                    color: Colors.amber, size: 18),
+                child: const Icon(
+                  Icons.monitor_heart,
+                  color: Colors.amber,
+                  size: 18,
+                ),
               ),
               const SizedBox(width: 12),
               const Text(
@@ -213,28 +234,30 @@ class ConversationSummaryPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          ...insights.map((insight) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF5F7FA),
-                    borderRadius: BorderRadius.circular(8),
-                    border: const Border(
-                      left: BorderSide(color: AppColors.primary, width: 4),
-                    ),
-                  ),
-                  child: Text(
-                    insight,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: AppColors.textPrimary,
-                      height: 1.5,
-                    ),
+          ...insights.map(
+            (insight) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF5F7FA),
+                  borderRadius: BorderRadius.circular(8),
+                  border: const Border(
+                    left: BorderSide(color: AppColors.primary, width: 4),
                   ),
                 ),
-              )),
+                child: Text(
+                  insight,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: AppColors.textPrimary,
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -273,8 +296,11 @@ class ConversationSummaryPage extends StatelessWidget {
                   color: AppColors.primaryLight.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.checklist,
-                    color: AppColors.primary, size: 18),
+                child: const Icon(
+                  Icons.checklist,
+                  color: AppColors.primary,
+                  size: 18,
+                ),
               ),
               const SizedBox(width: 12),
               const Text(
@@ -288,10 +314,12 @@ class ConversationSummaryPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          ...recommendations.map((text) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: _buildRecommendationItem(text),
-              )),
+          ...recommendations.map(
+            (text) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: _buildRecommendationItem(text),
+            ),
+          ),
         ],
       ),
     );
@@ -400,10 +428,7 @@ class ConversationSummaryPage extends StatelessWidget {
         children: [
           const Text(
             'Was this helpful?',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.textSecondary,
-            ),
+            style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
           ),
           const SizedBox(height: 12),
           Row(

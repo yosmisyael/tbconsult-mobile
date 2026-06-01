@@ -19,6 +19,11 @@ if (envFile.exists()) {
     envFile.inputStream().use { localProperties.load(it) }
 }
 
+val backendEnvFile = rootProject.file("../tbconsult-api/.env")
+if (backendEnvFile.exists()) {
+    backendEnvFile.inputStream().use { localProperties.load(it) }
+}
+
 android {
     namespace = "com.mobile.tbconsult"
     compileSdk = flutter.compileSdkVersion
@@ -43,7 +48,9 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         
-        manifestPlaceholders["GOOGLE_MAP_API_KEY"] = localProperties.getProperty("GOOGLE_MAP_API_KEY") ?: ""
+        val mapsKey = (localProperties.getProperty("GOOGLE_MAP_API_KEY") ?: "")
+            .ifEmpty { localProperties.getProperty("MAPS_API_KEY") ?: "" }
+        manifestPlaceholders["GOOGLE_MAP_API_KEY"] = mapsKey
     }
 
     buildTypes {

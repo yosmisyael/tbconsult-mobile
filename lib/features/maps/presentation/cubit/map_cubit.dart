@@ -10,6 +10,8 @@ class MapCubit extends Cubit<MapState> {
   final GetFacilitiesUseCase getFacilitiesUseCase;
   final GetRouteUseCase getRouteUseCase;
 
+  String? _pendingFacilityId;
+
   MapCubit({
     required this.getFacilitiesUseCase,
     required this.getRouteUseCase,
@@ -24,12 +26,22 @@ class MapCubit extends Cubit<MapState> {
       final facilities = await getFacilitiesUseCase(
         GetFacilitiesParams(userLocation: location),
       );
+      
+      FacilityEntity? selected;
+      if (_pendingFacilityId != null) {
+        try {
+          selected = facilities.firstWhere((f) => f.id == _pendingFacilityId);
+        } catch (_) {}
+        _pendingFacilityId = null;
+      }
+
       emit(MapLoaded(
         allFacilities: facilities,
         filteredFacilities: facilities,
         activeFilters: const {},
         searchQuery: '',
         userLocation: location,
+        selectedFacility: selected,
       ));
     } catch (e) {
       emit(MapError(message: e.toString()));
@@ -97,6 +109,21 @@ class MapCubit extends Cubit<MapState> {
       selectedFacility: facility,
       clearRoute: true,
     ));
+  }
+
+  void selectFacilityById(String id) {
+    final current = _loaded;
+    if (current == null) {
+      _pendingFacilityId = id;
+      return;
+    }
+    try {
+      final facility = current.allFacilities.firstWhere((f) => f.id == id);
+      emit(current.copyWith(
+        selectedFacility: facility,
+        clearRoute: true,
+      ));
+    } catch (_) {}
   }
 
   void clearSelection() {

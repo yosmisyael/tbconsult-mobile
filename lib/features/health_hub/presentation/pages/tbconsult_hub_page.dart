@@ -65,8 +65,11 @@ class TBConsultHubPage extends StatelessWidget {
               ),
             ],
           ),
-          child: const Icon(Icons.smart_toy,
-              size: 60, color: AppColors.background),
+          child: const Icon(
+            Icons.smart_toy,
+            size: 60,
+            color: AppColors.background,
+          ),
         ),
         const SizedBox(height: 24),
         const Text(
@@ -107,9 +110,7 @@ class TBConsultHubPage extends StatelessWidget {
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.background,
         padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         elevation: 0,
       ),
       child: const Row(
@@ -143,15 +144,24 @@ class TBConsultHubPage extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: [
-            _buildTopicChip(context, 'Symptom Check',
-                Icons.medical_services_outlined,
-                'I want to check my symptoms'),
-            _buildTopicChip(context, 'Medication Help',
-                Icons.medication_outlined,
-                'I need help with my TB medication'),
-            _buildTopicChip(context, 'Dietary Tips',
-                Icons.restaurant_outlined,
-                'What foods should I eat during TB treatment?'),
+            _buildTopicChip(
+              context,
+              'Symptom Check',
+              Icons.medical_services_outlined,
+              'I want to check my symptoms',
+            ),
+            _buildTopicChip(
+              context,
+              'Medication Help',
+              Icons.medication_outlined,
+              'I need help with my TB medication',
+            ),
+            _buildTopicChip(
+              context,
+              'Dietary Tips',
+              Icons.restaurant_outlined,
+              'What foods should I eat during TB treatment?',
+            ),
           ],
         ),
       ],
@@ -245,8 +255,11 @@ class TBConsultHubPage extends StatelessWidget {
                   ),
                   child: const Column(
                     children: [
-                      Icon(Icons.chat_bubble_outline,
-                          color: AppColors.textSecondary, size: 32),
+                      Icon(
+                        Icons.chat_bubble_outline,
+                        color: AppColors.textSecondary,
+                        size: 32,
+                      ),
                       SizedBox(height: 8),
                       Text(
                         'No conversations yet',
@@ -282,8 +295,9 @@ class TBConsultHubPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (_) => BlocProvider<HealthHubCubit>(
-                              create: (_) => sl<HealthHubCubit>()
-                                ..loadRecentConversations(limit: 100),
+                              create: (_) =>
+                                  sl<HealthHubCubit>()
+                                    ..loadRecentConversations(limit: 100),
                               child: const AllConversationsPage(),
                             ),
                           ),
@@ -302,13 +316,17 @@ class TBConsultHubPage extends StatelessWidget {
                       child: const Text(
                         'View All',
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w600),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                 ],
               ),
               const SizedBox(height: 16),
-              ...conversations.take(5).map(
+              ...conversations
+                  .take(5)
+                  .map(
                     (conv) => Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: _buildChatCard(context, conv),
@@ -376,8 +394,10 @@ class TBConsultHubPage extends StatelessWidget {
                   color: AppColors.primaryLight.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.chat_bubble_outline,
-                    color: AppColors.primary),
+                child: const Icon(
+                  Icons.chat_bubble_outline,
+                  color: AppColors.primary,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -435,16 +455,30 @@ class TBConsultHubPage extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Hapus Riwayat Chat?', style: TextStyle(fontWeight: FontWeight.bold)),
-        content: const Text('Apakah Anda yakin ingin menghapus riwayat chat ini? Tindakan ini tidak dapat dibatalkan.'),
+        title: const Text(
+          'Hapus Riwayat Chat?',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: const Text(
+          'Apakah Anda yakin ingin menghapus riwayat chat ini? Tindakan ini tidak dapat dibatalkan.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Batal', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+            child: const Text(
+              'Batal',
+              style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text('Hapus', style: TextStyle(color: Colors.red.shade700, fontWeight: FontWeight.bold)),
+            child: Text(
+              'Hapus',
+              style: TextStyle(
+                color: Colors.red.shade700,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -478,8 +512,8 @@ class TBConsultHubPage extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (_) => BlocProvider<ConversationCubit>(
-          create: (_) => sl<ConversationCubit>()
-            ..loadExistingConversation(conversationId),
+          create: (_) =>
+              sl<ConversationCubit>()..loadExistingConversation(conversationId),
           child: const TBConsultConversationPage(),
         ),
       ),

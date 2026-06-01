@@ -30,6 +30,8 @@ class _MapPageState extends State<MapPage> {
   // ── Marker BitmapDescriptors ─────────────────────────────────────────
   final Map<FacilityType, BitmapDescriptor> _markerIcons = {};
 
+  FacilityEntity? _lastSelectedFacility;
+
   @override
   void initState() {
     super.initState();
@@ -217,7 +219,6 @@ class _MapPageState extends State<MapPage> {
         ),
         onTap: () {
           context.read<MapCubit>().selectFacility(facility);
-          _showDetailSheet(facility);
         },
       );
     }).toSet();
@@ -348,19 +349,32 @@ class _MapPageState extends State<MapPage> {
       );
     }
 
-    if (state is MapLoaded && state.routePoints.isNotEmpty) {
-      // Zoom to fit the route
-      await _fitPolylineBounds(state.routePoints);
-    }
+    if (state is MapLoaded) {
+      if (state.selectedFacility != null &&
+          state.selectedFacility != _lastSelectedFacility) {
+        _lastSelectedFacility = state.selectedFacility;
+        final ctrl = await _mapController.future;
+        await ctrl.animateCamera(
+          CameraUpdate.newLatLngZoom(
+            LatLng(state.selectedFacility!.lat, state.selectedFacility!.lng),
+            15.0,
+          ),
+        );
+        _showDetailSheet(state.selectedFacility!);
+      } else if (state.selectedFacility == null) {
+        _lastSelectedFacility = null;
+      }
 
-    if (state is MapLoaded &&
-        state.userLocation != null &&
-        state.routePoints.isEmpty) {
-      // On first load, animate to user
-      final ctrl = await _mapController.future;
-      await ctrl.animateCamera(
-        CameraUpdate.newLatLngZoom(state.userLocation!, 13),
-      );
+      if (state.routePoints.isNotEmpty) {
+        // Zoom to fit the route
+        await _fitPolylineBounds(state.routePoints);
+      } else if (state.userLocation != null && state.selectedFacility == null) {
+        // On first load, animate to user
+        final ctrl = await _mapController.future;
+        await ctrl.animateCamera(
+          CameraUpdate.newLatLngZoom(state.userLocation!, 13),
+        );
+      }
     }
   }
 
@@ -410,7 +424,11 @@ class _MapPageState extends State<MapPage> {
           photoService: sl<FacilityPhotoService>(),
         ),
       ),
-    );
+    ).then((_) {
+      if (mounted) {
+        context.read<MapCubit>().clearSelection();
+      }
+    });
   }
 
   void _showFilterSheet(MapState state) {

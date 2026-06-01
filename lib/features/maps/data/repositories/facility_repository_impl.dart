@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:TBConsult/core/error/failures.dart';
-import 'package:TBConsult/core/network/dio_client.dart';
 import 'package:TBConsult/features/maps/data/data_sources/surabaya_facilities_data.dart';
 import 'package:TBConsult/features/maps/domain/entities/facility_entity.dart';
 import 'package:TBConsult/features/maps/domain/repositories/facility_repository.dart';
@@ -33,7 +33,14 @@ class FacilityRepositoryImpl implements FacilityRepository {
               .compareTo(b.distanceKm ?? double.infinity));
   }
 
-  // ── Route (Proxy through backend) ───────────────────────────────────────────
+  // ── Route (Direct Google Directions call) ───────────────────────────────────
+
+  final Dio _plainDio = Dio(
+    BaseOptions(
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+    ),
+  );
 
   @override
   Future<List<LatLng>> getRoute({
@@ -41,11 +48,18 @@ class FacilityRepositoryImpl implements FacilityRepository {
     required LatLng destination,
   }) async {
     try {
-      final response = await DioClient.instance.dio.get<Map<String, dynamic>>(
-        '/maps/route',
+      final apiKey = dotenv.env['GOOGLE_MAP_API_KEY'] ?? dotenv.env['MAPS_API_KEY'] ?? '';
+      if (apiKey.isEmpty) {
+        throw const ServerFailure('Maps API Key is not configured on the client.');
+      }
+
+      final response = await _plainDio.get<Map<String, dynamic>>(
+        'https://maps.googleapis.com/maps/api/directions/json',
         queryParameters: {
           'origin': '${origin.latitude.toStringAsFixed(6)},${origin.longitude.toStringAsFixed(6)}',
           'destination': '${destination.latitude.toStringAsFixed(6)},${destination.longitude.toStringAsFixed(6)}',
+          'mode': 'driving',
+          'key': apiKey,
         },
       );
 

@@ -101,7 +101,7 @@ Future<void> init() async {
   // ── Maps: Use Cases ────────────────────────────────────────────────────
   sl.registerLazySingleton(() => GetFacilitiesUseCase(sl()));
   sl.registerLazySingleton(() => GetRouteUseCase(sl()));
-  sl.registerLazySingleton(() => FacilityPhotoService(apiKey: dotenv.env['GOOGLE_MAP_API_KEY'] ?? ''));
+  sl.registerLazySingleton(() => FacilityPhotoService(apiKey: dotenv.env['GOOGLE_MAP_API_KEY'] ?? dotenv.env['MAPS_API_KEY'] ?? ''));
   // ── Maps: Cubit ────────────────────────────────────────────────────────
   sl.registerFactory(
         () => MapCubit(
